@@ -1,4 +1,4 @@
-// Copyright ©2017 The gonum Authors. All rights reserved.
+// Copyright ©2017 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -24,12 +24,12 @@ func Ger(m, n uintptr, alpha float32,
 	}
 
 	var ky, kx uintptr
-	if incY > 0 {
+	if int(incY) > 0 {
 		ky = 0
 	} else {
 		ky = -(n - 1) * incY
 	}
-	if incX > 0 {
+	if int(incX) > 0 {
 		kx = 0
 	} else {
 		kx = -(m - 1) * incX

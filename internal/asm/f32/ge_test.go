@@ -1,4 +1,4 @@
-// Copyright ©2017 The gonum Authors. All rights reserved.
+// Copyright ©2017 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -22,16 +22,16 @@ var gerTests = []struct {
 	x    []float32
 	y    []float32
 
-	trueAns []float32
+	want []float32
 }{
 	{
-		name:    "Unit",
-		m:       1,
-		n:       1,
-		a:       []float32{10},
-		x:       []float32{2},
-		y:       []float32{4.4},
-		trueAns: []float32{18.8},
+		name: "Unit",
+		m:    1,
+		n:    1,
+		a:    []float32{10},
+		x:    []float32{2},
+		y:    []float32{4.4},
+		want: []float32{18.8},
 	},
 	{
 		name: "M gt N",
@@ -44,9 +44,9 @@ var gerTests = []struct {
 			8, 9, -10,
 			-12, -14, -6,
 		},
-		x:       []float32{-2, -3, 0, 1, 2},
-		y:       []float32{-1.1, 5, 0},
-		trueAns: []float32{3.5, -7.6, 3.5, 5.9, -12.2, 3.3, -1.3, -4.3, -9.7, 6.9, 14, -10, -14.2, -4, -6},
+		x:    []float32{-2, -3, 0, 1, 2},
+		y:    []float32{-1.1, 5, 0},
+		want: []float32{3.5, -7.6, 3.5, 5.9, -12.2, 3.3, -1.3, -4.3, -9.7, 6.9, 14, -10, -14.2, -4, -6},
 	},
 	{
 		name: "M eq N",
@@ -57,9 +57,9 @@ var gerTests = []struct {
 			2.6, 2.8, 3.3,
 			-1.3, -4.3, -9.7,
 		},
-		x:       []float32{-2, -3, 0},
-		y:       []float32{-1.1, 5, 0},
-		trueAns: []float32{3.5, -7.6, 3.5, 5.9, -12.2, 3.3, -1.3, -4.3, -9.7},
+		x:    []float32{-2, -3, 0},
+		y:    []float32{-1.1, 5, 0},
+		want: []float32{3.5, -7.6, 3.5, 5.9, -12.2, 3.3, -1.3, -4.3, -9.7},
 	},
 	{
 		name: "M lt N",
@@ -70,9 +70,9 @@ var gerTests = []struct {
 			2.6, 2.8, 3.3, -3.4, 6.2, -8.7,
 			-1.3, -4.3, -9.7, -3.1, 8.9, 8.9,
 		},
-		x:       []float32{-2, -3, 0},
-		y:       []float32{-1.1, 5, 0, 9, 19, 22},
-		trueAns: []float32{3.5, -7.6, 3.5, -13.2, -36.89, -53, 5.9, -12.2, 3.3, -30.4, -50.8, -74.7, -1.3, -4.3, -9.7, -3.1, 8.9, 8.9},
+		x:    []float32{-2, -3, 0},
+		y:    []float32{-1.1, 5, 0, 9, 19, 22},
+		want: []float32{3.5, -7.6, 3.5, -13.2, -36.89, -53, 5.9, -12.2, 3.3, -30.4, -50.8, -74.7, -1.3, -4.3, -9.7, -3.1, 8.9, 8.9},
 	},
 	{
 		name: "M gt N",
@@ -85,9 +85,9 @@ var gerTests = []struct {
 			8, 9, -10,
 			-12, -14, -6,
 		},
-		x:       []float32{-2, 0, 2, 0, 7},
-		y:       []float32{-1.1, 8, 7},
-		trueAns: []float32{3.5, -13.6, -10.5, 2.6, 2.8, 3.3, -3.5, 11.7, 4.3, 8, 9, -10, -19.700000000000003, 42, 43},
+		x:    []float32{-2, 0, 2, 0, 7},
+		y:    []float32{-1.1, 8, 7},
+		want: []float32{3.5, -13.6, -10.5, 2.6, 2.8, 3.3, -3.5, 11.7, 4.3, 8, 9, -10, -19.700000000000003, 42, 43},
 	},
 	{
 		name: "M eq N",
@@ -98,27 +98,27 @@ var gerTests = []struct {
 			2.6, 2.8, 3.3,
 			-1.3, -4.3, -9.7,
 		},
-		x:       []float32{-2, 7, 12, -11},
-		y:       []float32{-1.1, 0, 6},
-		trueAns: []float32{3.5, 2.4, -8.5, -5.1, 2.8, 45.3, -14.5, -4.3, 62.3},
+		x:    []float32{-2, 7, 12, -11},
+		y:    []float32{-1.1, 0, 6},
+		want: []float32{3.5, 2.4, -8.5, -5.1, 2.8, 45.3, -14.5, -4.3, 62.3},
 	},
 	{
-		name:    "M lt N",
-		m:       3,
-		n:       6,
-		a:       []float32{1.3, 2.4, 3.5, 4.8, 1.11, -9, 2.6, 2.8, 3.3, -3.4, 6.2, -8.7, -1.3, -4.3, -9.7, -3.1, 8.9, 8.9},
-		x:       []float32{-2, 0, 9, -3},
-		y:       []float32{-1.1, 0, 19, 11, -9.22, 7},
-		trueAns: []float32{3.5, 2.4, -34.5, -17.2, 19.55, -23, 2.6, 2.8, 3.3, -3.4, 6.2, -8.7, -11.2, -4.3, 161.3, 95.9, -74.08, 71.9},
+		name: "M lt N",
+		m:    3,
+		n:    6,
+		a:    []float32{1.3, 2.4, 3.5, 4.8, 1.11, -9, 2.6, 2.8, 3.3, -3.4, 6.2, -8.7, -1.3, -4.3, -9.7, -3.1, 8.9, 8.9},
+		x:    []float32{-2, 0, 9, -3},
+		y:    []float32{-1.1, 0, 19, 11, -9.22, 7},
+		want: []float32{3.5, 2.4, -34.5, -17.2, 19.55, -23, 2.6, 2.8, 3.3, -3.4, 6.2, -8.7, -11.2, -4.3, 161.3, 95.9, -74.08, 71.9},
 	},
 	{
-		name:    "Y NaN element",
-		m:       1,
-		n:       1,
-		a:       []float32{1.3},
-		x:       []float32{1.3},
-		y:       []float32{float32(math.NaN())},
-		trueAns: []float32{float32(math.NaN())},
+		name: "Y NaN element",
+		m:    1,
+		n:    1,
+		a:    []float32{1.3},
+		x:    []float32{1.3},
+		y:    []float32{float32(math.NaN())},
+		want: []float32{float32(math.NaN())},
 	},
 	{
 		name: "M eq N large",
@@ -135,7 +135,7 @@ var gerTests = []struct {
 			39.4, -40.5, 7.9, -2.5, -7.7, 18.1, -25.5,
 			-18.5, 43.2, 2.1, 30.1, 3.02, -31.1, -7.6,
 		},
-		trueAns: []float32{
+		want: []float32{
 			-11.200001, 151.64, -25.14, -97.58, 54.120003, 26.919998, 111.649994,
 			-4.6, -108.79, 39.1, 50.1, -4, -5.8, -82.7,
 			8.12, 24.056004, 3.0639997, -27.392, -20.341997, 17.708, 49.56,
@@ -160,7 +160,7 @@ var gerTests = []struct {
 			39.4, -40.5, 7.9, -2.5, -7.7, 18.1, -25.5,
 			-18.5, 43.2, 2.1, 30.1, 3.02, -31.1, -7.6,
 		},
-		trueAns: []float32{
+		want: []float32{
 			-11.200001, 151.64, -186.34, -97.58, 116.12, 26.919998, 136.45,
 			-4.6, -108.79, 169.1, 50.1, -54, -5.8, -102.7,
 			137.12001, 1890.2561, -2534.816, -1050.792, 1563.058, 284.30798, 1866.28,
@@ -193,7 +193,7 @@ var gerTests = []struct {
 			21.7, 8.6, -13.82, 3.05, -2.29, 39.4, -40, 7.9, -2.5, -7.7, 18.1, -25.5, -18.5, 43.2, 2.1,
 			-34.1, 10.3, 4.5, -42.05, 9.4, 4, 19.2, 9.8, -32.7, 4.1, 4.4, -22.5, -7.8, 3.6, -24.5,
 		},
-		trueAns: []float32{
+		want: []float32{
 			-11.200001, 151.64, -186.34, -97.58, 116.12, 26.919998, 136.45, 52.5, 129.91, 44.82, 102.82, -37.28, -168.24, 136.84, 13.4,
 			-41.6, -98.2, 148, 17.45, -81.1, -11.5, -85.8, -30.2, -137.7, -11.4, -86.1, 37, 135.7, -104.9, -32,
 			154.72, 1932.956, -2558.936, -1052.242, 1602.818, 314.30798, 1822.28, 717.34, 1859.78, 267.20798, 1623.208, -1080.792, -2563.616, 1967.556, 135.12001,
@@ -214,7 +214,6 @@ var gerTests = []struct {
 }
 
 func TestGer(t *testing.T) {
-	// Ger(test.m, test.n, test.alpha, test.x, test.incX, test.y, test.incY, test.a, test.lda)
 	const (
 		xGdVal, yGdVal, aGdVal = -0.5, 1.5, -1
 		gdLn                   = 4
@@ -229,9 +228,9 @@ func TestGer(t *testing.T) {
 			ag := guardVector(test.a, aGdVal, align.x^align.y+gdLn)
 			a := ag[(align.x^align.y)+gdLn : len(ag)-(align.x^align.y+gdLn)]
 			Ger(test.m, test.n, alpha, x, 1, y, 1, a, test.n)
-			for i := range test.trueAns {
-				if !within(a[i], test.trueAns[i]) {
-					t.Errorf(msgVal, prefix, i, a[i], test.trueAns[i])
+			for i := range test.want {
+				if !within(a[i], test.want[i]) {
+					t.Errorf(msgVal, prefix, i, a[i], test.want[i])
 				}
 			}
 
@@ -245,10 +244,10 @@ func TestGer(t *testing.T) {
 				t.Errorf(msgGuard, prefix, "a", ag[:gdLn], ag[len(ag)-gdLn:])
 			}
 
-			if !equalStrided(test.x, x, 1) {
+			if !sameStrided(test.x, x, 1) {
 				t.Errorf("%v: modified read-only x argument", prefix)
 			}
-			if !equalStrided(test.y, y, 1) {
+			if !sameStrided(test.y, y, 1) {
 				t.Errorf("%v: modified read-only y argument", prefix)
 			}
 		}
@@ -263,7 +262,7 @@ func TestGer(t *testing.T) {
 			a := ag[gdLn : len(ag)-gdLn]
 
 			Ger(test.m, test.n, alpha, x, uintptr(inc.x), y, uintptr(inc.y), a, test.n)
-			for i := range test.trueAns {
+			for i := range test.want {
 				tmp := alpha*test.x[i/int(test.n)]*test.y[i%int(test.n)] + test.a[i]
 				if !within(a[i], tmp) {
 					t.Errorf(msgVal, prefix, i, a[i], tmp)
@@ -276,10 +275,10 @@ func TestGer(t *testing.T) {
 				t.Errorf(msgGuard, prefix, "a", ag[:gdLn], ag[len(ag)-gdLn:])
 			}
 
-			if !equalStrided(test.x, x, inc.x) {
+			if !sameStrided(test.x, x, inc.x) {
 				t.Errorf("%v: modified read-only x argument", prefix)
 			}
-			if !equalStrided(test.y, y, inc.y) {
+			if !sameStrided(test.y, y, inc.y) {
 				t.Errorf("%v: modified read-only y argument", prefix)
 			}
 			if t.Failed() {
@@ -289,9 +288,9 @@ func TestGer(t *testing.T) {
 	}
 }
 
-type sgerWrap struct{}
+type sgerer struct{}
 
-func (d sgerWrap) Sger(m, n int, alpha float32, x []float32, incX int, y []float32, incY int, a []float32, lda int) {
+func (sgerer) Sger(m, n int, alpha float32, x []float32, incX int, y []float32, incY int, a []float32, lda int) {
 	Ger(uintptr(m), uintptr(n), alpha, x, uintptr(incX), y, uintptr(incY), a, uintptr(lda))
 }
 
@@ -305,7 +304,7 @@ func BenchmarkBlasGer(t *testing.B) {
 			incX, incY := inc.x, inc.y
 			t.Run(fmt.Sprintf("Sger %dx%d (%d %d)", m, n, incX, incY), func(b *testing.B) {
 				for i := 0; i < t.N; i++ {
-					testblas.SgerBenchmark(b, sgerWrap{}, m, n, incX, incY)
+					testblas.SgerBenchmark(b, sgerer{}, m, n, incX, incY)
 				}
 			})
 		}

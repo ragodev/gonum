@@ -13,7 +13,7 @@ const (
 	msgRes   = "%v: unexpected result Got: %v Expected: %v"
 	msgVal   = "%v: unexpected value at %v Got: %v Expected: %v"
 	msgGuard = "%v: Guard violated in %s vector %v %v"
-	ε        = 1e-5
+	epsilon  = 1e-5
 )
 
 var (
@@ -21,14 +21,10 @@ var (
 	inf = float32(math.Inf(1))
 )
 
+// within tests for nan-aware equality within epsilon.
 func within(x, y float32) bool {
-	if same(x, y) {
-		return true
-	}
-	if x > y {
-		return x-y < ε
-	}
-	return y-x < ε
+	a, b := float64(x), float64(y)
+	return same(x, y) || math.Abs(a-b) <= epsilon
 }
 
 func same(x, y float32) bool {
@@ -40,9 +36,9 @@ func same64(a, b float64) bool {
 	return a == b || (math.IsNaN(a) && math.IsNaN(b))
 }
 
-// equalStrided returns true if the strided vector x contains elements of the
+// sameStrided returns true if the strided vector x contains elements of the
 // dense vector ref at indices i*inc, false otherwise.
-func equalStrided(ref, x []float32, inc int) bool {
+func sameStrided(ref, x []float32, inc int) bool {
 	if inc < 0 {
 		inc = -inc
 	}
