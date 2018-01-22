@@ -1,4 +1,4 @@
-// Copyright ©2017 The gonum Authors. All rights reserved.
+// Copyright ©2017 The Gonum Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -10,7 +10,6 @@ package f64
 //  A += alpha * x * y^T
 // where A is an m×n dense matrix, x and y are vectors, and alpha is a scalar.
 func Ger(m, n uintptr, alpha float64, x []float64, incX uintptr, y []float64, incY uintptr, a []float64, lda uintptr) {
-
 	if incX == 1 && incY == 1 {
 		x = x[:m]
 		y = y[:n]
@@ -30,7 +29,7 @@ func Ger(m, n uintptr, alpha float64, x []float64, incX uintptr, y []float64, in
 
 	ix := kx
 	for i := 0; i < int(m); i++ {
-		AxpyInc(alpha*x[ix], y, a[uintptr(i)*lda:uintptr(i)*lda+n], uintptr(n), uintptr(incY), 1, uintptr(ky), 0)
+		AxpyInc(alpha*x[ix], y, a[uintptr(i)*lda:uintptr(i)*lda+n], n, incY, 1, ky, 0)
 		ix += incX
 	}
 }
